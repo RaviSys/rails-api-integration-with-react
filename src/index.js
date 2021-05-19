@@ -9,6 +9,7 @@ import Home from './components/Home';
 import Contact from './components/Contact';
 import About from './components/About';
 import UsersList from './components/users/UsersList';
+import UserDetail from './components/users/UserDetail';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -20,6 +21,7 @@ const Routing = () => {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
+        <Route path="/users/:id" component={UserDetail} />
         <Route path="/users" component={UsersList} />
       </Switch>
     </Router>

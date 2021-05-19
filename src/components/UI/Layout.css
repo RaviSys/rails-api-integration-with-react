@@ -1,3 +1,7 @@
 .font-weight-400 {
   font-weight: 400 !important;
 }
+.email-text {
+  text-decoration: underline;
+  cursor: pointer;
+}
