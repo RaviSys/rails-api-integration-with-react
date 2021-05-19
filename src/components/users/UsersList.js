@@ -1,35 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import axios from 'axios';
+
 import UserDetail from './UserDetail';
 
-const DUMMY_USERS = [
-  {
-    id: 'u1',
-    name: 'Ravi Singh',
-    email: 'ravi@gmail.com',
-    contact: '+91 344-543-3454'
-  },
-  {
-    id: 'u2',
-    name: 'Shifali Singh',
-    email: 'shafali@gmail.com',
-    contact: '+91 344-543-3454'
-  },
-  {
-    id: 'u3',
-    name: 'Shifali Singh',
-    email: 'shafali@gmail.com',
-    contact: '+91 344-543-3454'
-  },
-  {
-    id: 'u4',
-    name: 'Shifali Singh',
-    email: 'shafali@gmail.com',
-    contact: '+91 344-543-3454'
-  }
-]
-
 const UsersList = () => {
-  const [users, setUsers] = useState(DUMMY_USERS);
+  const [users, setUsers] = useState([]);
+
+  const getUsers = useCallback(() => {
+    axios.get('http://localhost:3001/api/v1/users')
+    .then(response => {
+      setUsers(response.data)
+    })
+    .catch(error => console.log(error))
+  },[]);
+
+  const componentDidMount = useCallback(() => {
+    getUsers();
+  },[])
+
+  useEffect(() => {
+    componentDidMount();
+  }, [componentDidMount]);
 
   return(
     <React.Fragment>
