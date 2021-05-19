@@ -28,14 +28,21 @@ const UserDetail = (props) => {
 
   return(
     <ContainerLayout>
-      <div className="col-lg-8 mx-lg-auto">
+      <div className="col-lg-9 mx-lg-auto">
         <div className="card shadow mt-5">
-          <div className="card-body">
-            <h1>{user.name}</h1>
-            <p className="lead font-weight-400">Email: <span className="email-text text-primary">{user.email}</span></p>
-            <p className="lead font-weight-400">Contact: <span className="text-primary">{user.contact}</span></p>
-            <p className="lead font-weight-400">Account Created On: <span className="text-primary">{user.created_at}</span></p>
-            <Link to="/users" className="btn btn-primary">Back to Users</Link>
+          <div className="row g-0">
+            <div className="col-lg-4">
+              <img src={`${user.image_url}`} className="img-fluid"/>
+            </div>
+            <div className="col-lg-8">
+              <div className="card-body">
+                <h1>{user.name}</h1>
+                <p className="lead font-weight-400">Email: <span className="email-text text-primary">{user.email}</span></p>
+                <p className="lead font-weight-400">Contact: <span className="text-primary">{user.contact}</span></p>
+                <p className="lead font-weight-400">Account Created On: <span className="text-primary">{user.account_created_at}</span></p>
+                <Link to="/users" className="btn btn-primary">Back to Users</Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
