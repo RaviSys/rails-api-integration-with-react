@@ -44,7 +44,7 @@ const EditUser = (props) => {
   const updateUser = (userId, userData) => {
     axios.put(`http://localhost:3001/api/v1/users/${userId}`, {user: userData})
     .then(response => {
-      window.location.reload();
+      updatedUserDetails(response.data);
     })
     .catch(error => console.log(error))
   }
@@ -60,6 +60,12 @@ const EditUser = (props) => {
 
   const contactChangeHandler = (event) => {
     setUserContact(event.target.value);
+  }
+
+  const updatedUserDetails = (updatedDetails) => {
+    props.onEditUserDatails(updatedDetails)
+    props.onSubmitSuccess(true);
+    hideModal();
   }
 
   return(

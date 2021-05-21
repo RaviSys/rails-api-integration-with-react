@@ -4,6 +4,7 @@ import axios from "axios";
 
 import ContainerLayout from '../UI/ContainerLayout';
 import EditUser from "./EditUser";
+import FlashMessage from "./FlashMessage";
 
 const UserDetail = (props) => {
   const userId = props.match.params.id;
@@ -11,6 +12,7 @@ const UserDetail = (props) => {
 
   const [user, setUser] = useState({})
   const [editable, setEditable] = useState(false)
+  const [isAlertVisible, setIsAlertVisible] = useState(false)
 
   const getUser = useCallback(() => {
     axios.get(`http://localhost:3001/api/v1/users/${userId}`)
@@ -37,9 +39,18 @@ const UserDetail = (props) => {
     setEditable(bool);
   }
 
+  const setUpdatedUserData = (userData) => {
+    setUser(userData);
+  }
+
+  const displayFlashMessage = (bool) => {
+    setIsAlertVisible(bool);
+  }
+
   return(
     <ContainerLayout>
       <div className="col-lg-9 mx-lg-auto">
+        {isAlertVisible ? <FlashMessage /> : ''}
         <div className="card shadow mt-5">
           <div className="row g-0">
             <div className="col-lg-4">
@@ -57,7 +68,7 @@ const UserDetail = (props) => {
             </div>
           </div>
         </div>
-        <EditUser user={user} isEditable={editable} onHideModal={setModalVisibility}/>
+        <EditUser user={user} isEditable={editable} onHideModal={setModalVisibility} onEditUserDatails={setUpdatedUserData} onSubmitSuccess={displayFlashMessage} />
       </div>
     </ContainerLayout>
   )
