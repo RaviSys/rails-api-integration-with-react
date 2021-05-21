@@ -5,7 +5,7 @@ import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import ModalTitle from "react-bootstrap/ModalTitle";
 
-// import update from 'immutability-helper';
+import axios from "axios";
 
 const EditUser = (props) => {
 
@@ -18,12 +18,14 @@ const EditUser = (props) => {
   useEffect(() => {
     setUserName(props.user.name);
     setUserEmail(props.user.email);
-    setUserContact(props.user.contact)
+    setUserContact(props.user.contact);
+    setUserId(props.user.id);
   }, [props])
 
   const [userName, setUserName] = useState('')
   const [userEmail, setUserEmail] = useState('')
   const [userContact, setUserContact] = useState('')
+  const [userId, setUserId] = useState('')
 
   const hideModal = () => {
     props.onHideModal(false);
@@ -31,6 +33,20 @@ const EditUser = (props) => {
 
   const updateUserData = (event) => {
     event.preventDefault();
+    const userData = {
+      name: userName,
+      email: userEmail,
+      contact: userContact
+    }
+    updateUser(userId, userData);
+  }
+
+  const updateUser = (userId, userData) => {
+    axios.put(`http://localhost:3001/api/v1/users/${userId}`, {user: userData})
+    .then(response => {
+      window.location.reload();
+    })
+    .catch(error => console.log(error))
   }
 
   const nameChangeHandler = (event) => {
