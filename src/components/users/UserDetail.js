@@ -8,6 +8,7 @@ import EditUser from "./EditUser";
 const UserDetail = (props) => {
   const userId = props.match.params.id;
 
+
   const [user, setUser] = useState({})
   const [editable, setEditable] = useState(false)
 
@@ -15,7 +16,6 @@ const UserDetail = (props) => {
     axios.get(`http://localhost:3001/api/v1/users/${userId}`)
     .then(response => {
       setUser(response.data);
-      console.log(response.data);
     })
     .catch(error => console.log(error))
   },[]);
