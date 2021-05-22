@@ -6,7 +6,7 @@ import NewUser from './NewUser';
 
 const UsersList = () => {
   const [users, setUsers] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getUsers = useCallback(() => {
     axios.get('http://localhost:3001/api/v1/users')
