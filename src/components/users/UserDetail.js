@@ -8,7 +8,7 @@ import FlashMessage from "./FlashMessage";
 
 const UserDetail = (props) => {
   const userId = props.match.params.id;
-
+  const successMessage = 'User has been updated successfully';
 
   const [user, setUser] = useState({})
   const [editable, setEditable] = useState(false)
@@ -50,7 +50,7 @@ const UserDetail = (props) => {
   return(
     <ContainerLayout>
       <div className="col-lg-9 mx-lg-auto">
-        {isAlertVisible ? <FlashMessage /> : ''}
+        {isAlertVisible ? <FlashMessage message={successMessage}/> : ''}
         <div className="card shadow mt-5">
           <div className="row g-0">
             <div className="col-lg-4">
