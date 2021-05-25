@@ -2,11 +2,14 @@ import React, { useState, useRef } from 'react';
 import axios from "axios";
 
 import FlashMessage from "./users/FlashMessage";
+import ErrorList from "./shared/ErrorList";
 
 const Contact = () => {
 
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const successMessage = "Contact info has been saved successfully.";
+  const [isAPIError, setIsAPIError] = useState(false);
+  const [contactErrors, setContactErrors] = useState('');
 
   const email = useRef();
   const name = useRef();
@@ -14,6 +17,7 @@ const Contact = () => {
   const message = useRef();
 
   const saveContactData = (event) => {
+
     event.preventDefault();
     const contactUsData = {
       name: name.current.value,
@@ -21,21 +25,27 @@ const Contact = () => {
       phone: phone.current.value,
       message: message.current.value
     }
-    createContact(contactUsData)
+    createContact(contactUsData);
     email.current.value = "";
     name.current.value = "";
     phone.current.value = "";
     message.current.value = "";
-    setIsAlertVisible(true)
   }
+
+  const HEADERS = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  } 
 
   const createContact = (contactUsData) => {
     axios.post(`http://localhost:3001/api/v1/contacts`, { contact: contactUsData })
     .then(response => {
-      // window.location.reload();
+      setIsAlertVisible(true)
       console.log(response.data);
     })
-    .catch(error => console.log(error.message))
+    .catch(error => {
+      console.log(error.response.data);
+    })
   }
 
   return(
