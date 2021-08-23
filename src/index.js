@@ -11,6 +11,8 @@ import Contact from './components/Contact';
 import About from './components/About';
 import UsersList from './components/users/UsersList';
 import UserDetail from './components/users/UserDetail';
+import ErrorList from './components/ReactErrors/ErrorList';
+import ErrorDetail from './components/ReactErrors/ErrorDetail';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -24,6 +26,8 @@ const Routing = () => {
         <Route path="/contact" component={Contact} />
         <Route path="/users/:id" component={UserDetail} />
         <Route path="/users" component={UsersList} />
+        <Route path="/react-errors" component={ErrorList} />
+        <Route path="/react-error/:id" component={ErrorDetail} />
       </Switch>
     </Router>
   )

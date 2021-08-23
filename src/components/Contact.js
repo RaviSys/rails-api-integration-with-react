@@ -9,7 +9,7 @@ const Contact = () => {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const successMessage = "Contact info has been saved successfully.";
   const [isAPIError, setIsAPIError] = useState(false);
-  const [contactErrors, setContactErrors] = useState('');
+  const [contactErrors, setContactErrors] = useState([]);
 
   const email = useRef();
   const name = useRef();
@@ -32,11 +32,6 @@ const Contact = () => {
     message.current.value = "";
   }
 
-  const HEADERS = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  } 
-
   const createContact = (contactUsData) => {
     axios.post(`http://localhost:3001/api/v1/contacts`, { contact: contactUsData })
     .then(response => {
@@ -44,7 +39,9 @@ const Contact = () => {
       console.log(response.data);
     })
     .catch(error => {
-      console.log(error.response.data);
+      console.log({...error.response.data});
+      setContactErrors(Promise.resolve(error));
+      console.log(contactErrors);
     })
   }
 

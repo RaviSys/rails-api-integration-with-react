@@ -8,7 +8,7 @@ import FlashMessage from "./FlashMessage";
 
 const UserDetail = (props) => {
   const userId = props.match.params.id;
-  const successMessage = 'User has been updated successfully';
+  const successMessage = 'User has been updated successfully.';
 
   const [user, setUser] = useState({})
   const [editable, setEditable] = useState(false)
